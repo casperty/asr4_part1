@@ -1,0 +1,87 @@
+#include <stdio.h>
+int monstrlen(const char *s){
+int nb=0;
+int i=0;
+    while(s[i]!='\0'){/* ou while(*s++ != '\0')*/
+        nb++;   
+        i++;
+    }
+return nb;
+}   
+int mon_strlen(char s[]){
+int nb=0;
+int i=0;
+    while(s[i]!='\0'){
+        nb++;   
+        i++;
+    }
+return nb;
+}
+int mon_strcmp(const char *s1, const char *s2){
+int i=0;
+while(s1[i]!='\0' || s2[i]!='\0'){
+    if(s1[i]<s2[i]){
+        return -1;
+    }else if(s1[i]>s2[i]){
+        return 1;
+    }
+	i++;
+}
+	return 0;
+}
+int monstrncmp(const char * s1, const char * s2, int n){
+int i=0;
+while(i<n){
+    if(s1[i]<s2[i]){
+        return -1;
+    }else if(s1[i]>s2[i]){
+        return 1;
+    }
+	i++;
+}
+	return 0;
+}
+char *mon_strcat(char *s1, const char *s2){
+while(*s1!='\0'){
+	s1++;
+}
+while(*s2!='\0'){
+	*s1=*s2;
+	s1++;
+	s2++;
+
+}
+return s1;
+}
+char *mon_strchr(char *s, int c){
+	while(*s){
+		s++;
+	}
+	printf("blaaaaaaaaaaaaaaaaaaaa : %d", monstrlen(s));
+	if(monstrlen(s)==0)
+		return (char*) "null";
+
+	return s;
+}
+
+char *mon_strstr(char *haystack, char *needle){
+int i=0;
+int j;
+int boolean;
+	while(haystack[i]!='\0'){
+		if(haystack[i]==needle[0]){
+			for(j=1; j<mon_strlen(needle); j++){
+				if(haystack[i+j]==needle[j]){
+					boolean=1;
+				}else{
+					boolean=0;
+				}
+			}if(boolean==1){
+				return needle;
+			}
+		}
+	i++;} 
+return NULL;
+}
+
+

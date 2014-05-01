@@ -1,0 +1,82 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#include "fonctions.h"
+
+char * miroir (const char *s){
+	char *ch=(char *)malloc(sizeof(s));
+int i=0, j= strlen(s)-1;
+	if(ch==NULL) return NULL;
+	else{
+		/*while(*ch){*/
+		for(i=0; i<strlen(s);i++){
+			ch[i]=s[j];
+			j--;
+		}
+	}
+	return ch;
+}
+char * saisie(){
+	char *foo=(char *)malloc(5*sizeof(char)), *tmp;
+	char c;
+	int n=1, i=0;
+
+	do{
+		c=getchar();
+		foo[i]=c;
+		i++;
+		if(i==5*n*sizeof(foo))
+		{
+			tmp=(char *) realloc(foo, 5*(++n)*sizeof(char)); 
+			if(tmp!=NULL)
+				foo=tmp;
+		}
+	}while(c!='\n'&&c!=' ');
+	foo[strlen(foo)]='\0';
+	/*foo=(char *) realloc(foo, strlen(foo));*/
+	return foo;
+}
+int mock_main(int argc, char *argv[]){
+	char dash = '-';
+	char *error, *str, *arg;
+	int i=0,s=0, m=0;
+	error = "Mauvaise utilisation";
+	arg = &dash;
+	if(argc < 2){
+		printf("%s\n", error);
+		return -1;
+	}
+	/*verification des options*/
+	for(i=1; i<argc; i++){
+		if(strncmp(argv[i], arg, 1)==0){
+			if(strchr(argv[i], 'm')){
+				m=1;
+			}
+			if(strchr(argv[i], 's')){
+				s=1;
+			}
+			if(!strchr(argv[i], 'm') && !strchr(argv[i], 's')){
+				printf("%s\n", error);
+				return -1;
+			}
+		} else {
+			str = argv[i];
+		}
+	}
+	if( (m==1&&str==NULL&&s==0) || (s==1&&str!=NULL) ){
+		printf("%s\n", error);
+		return -1;
+	}
+	if(s==1){
+		str = saisie();
+	}
+	if(m==1){
+		str = miroir(str);
+	}
+	
+	printf("%s\n", str);
+	
+	return 0;
+}

@@ -1,0 +1,45 @@
+#include <stdio.h>
+extern int mon_strlen(char s[]);
+extern int monstrlen(const char *s);
+extern int mon_strcmp(const char *s1, const char *s2);
+extern int monstrncmp(const char * s1, const char * s2, int n);
+extern char *mon_strcat(char *s1, const char *s2);
+extern char *mon_strchr(char *s, int c);
+extern char *mon_strstr(char *haystack, char *needle);
+
+
+int main(){
+	char apres[]="apres";
+	char voila[]="voila";
+	char bonjour[]="bonjour";
+	char monTableau[]="test";
+	char monTableau2[]="teste";
+	char *pointeur = &monTableau[0];
+	char *pointeur2=monTableau2;
+	char *pointeur3; 
+	int longueur;
+	int comparateur;
+	printf("Exerice 1\n");
+	longueur=mon_strlen(bonjour);
+	printf("Longueur de \'bonjour\' : %i\n",longueur);
+	longueur=mon_strlen(apres);
+	printf("Longueur de \'apres\' : %i\n",longueur);
+	longueur=mon_strlen(voila);
+	printf("Longueur de \'voila\' : %i\n",longueur);
+	printf("Exerice 2\n");
+	longueur=monstrlen(pointeur);
+	printf("Longueur de \'test\' (pointeur) : %i\n",longueur);
+	printf("Exerice 3\n");
+	comparateur=mon_strcmp(pointeur,pointeur2);
+	printf("Comparaison entre \'test\' et \'teste\': %i\n",comparateur);
+	comparateur=monstrncmp(pointeur,pointeur2,5);
+	printf("Comparaison : %i\n",comparateur);
+	pointeur3=mon_strcat(pointeur, pointeur2);
+	printf("Concatenation : %s\n",pointeur3);
+	printf("Exercice 6 : %c \n",*mon_strchr(pointeur2, 'e')); /*retourne este*/
+	printf("Exercice 6 : %c \n",*mon_strchr(pointeur2, 'f'));
+
+	printf("Exercice 7 : %c \n",*mon_strstr(monTableau, monTableau2)); /*retourne erreur*/
+	
+	return 0;
+}
